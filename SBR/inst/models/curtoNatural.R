@@ -1,4 +1,8 @@
-# This script, curtoNatural.R, shows how Curto's model
+# This script, curtoNatural.R, shows how Curto's model 
+
+# Curto, R., Voit, E. O., Sorribas, A. and Cascante, M. Mathematical models of
+# purine metabolism in man. Math.Biosci. 151, 1-49 (1998b).
+
 # might be implemented in R naturally (without knowledge of SBML).
 library(deSolve)
 

@@ -4,7 +4,7 @@ id="curto",
 
 notes=c(
 "This is a purine metabolism model that is geared toward studies of gout.", 
-"The model is fully described in Curto et al., MBSC 151 (1998) pp 1-49",
+"The model is fully described in Curto et al., Math Biosci 151 (1998) pp 1-49",
 "The model uses Generalized Mass Action (GMA;i.e. power law) descriptions of reaction rate laws.",
 "Such descriptions are local approximations that assume independent substrate binding. ",
 "                    ",
