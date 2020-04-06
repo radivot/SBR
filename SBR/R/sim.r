@@ -14,34 +14,12 @@
     v=rep(0,mi$nReactions)
     xp=rep(0,mi$nStates)
     St=mi$S0
-#     X[X<0]=0  # need this out else sod model rattles a lot
     St[mi$BC==FALSE]=X
 
 # TR version of this    
     if (mi$nRules>0) 
       for (j in 1:mi$nRules)
         St[model$rules[[j]]$idOutput]=model$rules[[j]]$law(St[model$rule[[j]]$inputs]) 
-# # VV version of this. 
-#     Vt = mi$VP  									#parameter values
-#     if (mi$nRules>0) 
-#       for (j in 1:mi$nRules) {
-#         if(!(is.na(St[model$rules[[j]]$idOutput])))							#assignment rule for species not for parameters
-#         {
-#           St[model$rules[[j]]$idOutput]=model$rules[[j]]$law(St[model$rule[[j]]$inputs]) 
-#         }
-#         else if(model$globalParameters[model$rules[[j]]$idOutput] != 0) #assignment rule for parameter object, not species
-#         {
-#           output <- model$rules[[j]]$idOutput
-#           val <- model$rules[[j]]$law(St[model$rule[[j]]$inputs])  			#computing the assigment
-#           model$globalParameters[model$rules[[j]]$idOutput][[1]] = as.numeric(val[[1]])	#retrieving only the value
-#           rule_val[row_count, j] <- as.numeric(val[[1]])
-#           row_count <- row_count + 1
-#         }
-#         else {
-#           next;										#skip that assignment instead of crashing the system.
-#         }
-#  ######################################       
-    
     
     if (p["mod"]==1) {
       if (t<0) 
@@ -68,9 +46,6 @@
   
   if (is.null(X0)) X0=mi$y0
     out=ode(y=X0,times=times,fderiv,  parms=c(mod=mod), ...)
-#       out=ode(y=mi$y0,times=times,fderiv,  parms=c(mod=mod),  rtol=1e-4, atol= my.atol) 
-#   out=lsoda(y=X0,times=times,fderiv,  parms=c(mod=mod),  rtol=1e-4, atol= my.atol) else
-#     out=lsoda(y=mi$y0,times=times,fderiv,  parms=c(mod=mod),  rtol=1e-4, atol= my.atol) 
   detach(model$globalParameters)
   out
 } 

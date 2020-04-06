@@ -6,18 +6,6 @@
 	ruleIDs=names(model$rules)
 	nReactions=length(model$reactions);nSpecies=length(model$species);nRules=length(model$rules) 
 	
-#	##### by Vishak Venkateswaran (VV)
-#	pIDs=names(model$ParametersList)
-#	nParams = length(model$ParametersList)
-#	#Parameters
-#	P0 = NULL; VP = NULL
-#	if(nParams > 0)
-#		for (i in 1:nParams){
-#			P0[i]=model$ParametersList[[i]]$id; 
-#			VP[i]=model$ParametersList[[i]]$value
-#		}
-#	names(VP)<-pIDs
-#	################  
 # Species
 	S0=NULL;BC=NULL # initialize 
 	for (i in 1:nSpecies){
@@ -33,25 +21,9 @@
   rLaws=sapply(model$reactions,function(x) x$strLaw)
   globals=model$globalParameters
 	attach(globals)  # e.g. for global coordination of k5 in SOD2012
-#   V0=with(model$globalParameters, # not sure why this didn't work in SOD2012
-# 			sapply(model$reactions,function(x) x$law(S0[c(x$reactants,x$modifiers)],x$parameters)))
 	V0=sapply(model$reactions,function(x) x$law(S0[c(x$reactants,x$modifiers)],x$parameters))
 	names(V0)<-rIDs
 	detach(globals)  
-	
-# 	attach(model$globalParameters)  # e.g. for Vmax global coordination in RNR
-# 	
-# 	# Reactions
-# 	rLaws=NULL;V0=NULL # initialize
-# 	for (j in 1:nReactions) {
-# 	  rLaws[j]<-model$reactions[[j]]$strLaw  	#this gives you null which is wrong
-# 	  
-# 	  V0[j]=model$reactions[[j]]$law(S0[c(model$reactions[[j]]$reactants,model$reactions[[j]]$modifiers,model$reactions[[j]]$products)], model$reactions[[j]]$parameters)
-# 	}
-# 	names(rLaws)<-rIDs
-# 	names(V0)<-rIDs
-# 	detach(model$globalParameters)  
-  
   
 # Incidence Matrix
 	incid=matrix(rep(0,nStates*nReactions),nrow=nStates)

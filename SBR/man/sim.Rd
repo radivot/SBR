@@ -30,41 +30,10 @@ as a side effect within the (now internal) function \code{fderiv}. }
 
 \examples{
 ##---- The following perturbs PRPP from 5 to 50 uM in Curto et al.'s model.
-library(SBMLR) 
-curto=readSBMLR(file.path(system.file(package="SBMLR"), "models/curto.r"))  
+library(SBR) 
+curto=readSBMLR(file.path(system.file(package="SBR"), "models/curto.r"))  
 (dPRPP10 <- data.frame(var = "PRPP", time = 0, value = 10,method = "mult"))
 (out=sim(curto,times=seq(-20,70,1),events = list(data = dPRPP10) ) )
 plot(out,which=c("PRPP","den","IMP","HX","Gua","aprt","XMP","Xa","UA"))
-
-
-##---- The following generates Morrison's folate system response to 1uM MTX 
-morr=readSBMLR(file.path(system.file(package="SBMLR"), "models/morrison.r"))  
-out1=sim(morr,seq(-20,0,1))
-morr$species$EMTX$ic=1
-out2=sim(morr,0:30)
-outs=data.frame(rbind(out1,out2))
-attach(outs)
-par(mfrow=c(3,4))
-plot(time,FH2b,type="l",xlab="Hours")
-plot(time,FH2f,type="l",xlab="Hours")
-plot(time,DHFRf,type="l",xlab="Hours")
-plot(time,DHFRtot,type="l",xlab="Hours")
-plot(time,CHOFH4,type="l",xlab="Hours")
-plot(time,FH4,type="l",xlab="Hours")
-plot(time,CH2FH4,type="l",xlab="Hours")
-plot(time,CH3FH4,type="l",xlab="Hours")
-plot(time,AICARsyn,type="l",xlab="Hours")
-plot(time,MTR,type="l",xlab="Hours")
-plot(time,TYMS,type="l",xlab="Hours")
-#plot(time,EMTX,type="l",xlab="Hours")
-plot(time,DHFReductase,type="l",xlab="Hours")
-par(mfrow=c(1,1))
-detach(outs)
-morr$species$EMTX$ic=0
-
-## Note: This does not work, since EMTX is not a state variable, it is a bc
-##(dEMTX1 <- data.frame(var = "EMTX", time = 0, value = 1,method = "add"))
-##(out=simulate(morr,times=seq(-20,30,1),events = list(data = dEMTX1) ) )
-
 }
 \keyword{ math }% at least one, from doc/KEYWORDS
