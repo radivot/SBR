@@ -17,8 +17,10 @@ param(mod1)
 V=20 # assuming V=20L
 (CL=0.693*V/tp5_1[1])  # 0.693 × Vd /tp5
 mod1=param(mod1,list(CL=16.5,KA=100)) #fast absorption mimics injection 
+# mod1=mod1%>%zero_re()  #what does this do?
 mev=mod1 %>% ev(amt = 75, ii = 24, addl = 0) 
 mev%>%mrgsim(end = 15, delta = 0.1)%>%plot(CP~time)
+mev%>%mrgsim(end = 15, delta = 0.1)
 d=mev%>%mrgsim_df(end = 15, delta = 0.1)
 head(d)
 auc1=0.1*sum(d$CP) # in h*mg/L  
