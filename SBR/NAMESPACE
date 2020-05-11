@@ -1,4 +1,4 @@
-export(readSBMLR,sim)
+export(readSBMLR,sim,tpm,fpkm,cpm)
 importFrom(deSolve, ode)
 import(XML)
 S3method(summary, SBMLR)
