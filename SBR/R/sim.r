@@ -4,7 +4,7 @@
   mi=summary(model) # mi = model info
 # print(mi);next
 #   my.atol <- rep(1e-4,mi$nStates)
-  attach(model$globalParameters)  # in Morrison this makes Keq globally available 
+  # attach(model$globalParameters)  # in Morrison this makes Keq globally available 
   mod=0
   if (class(modulator)=="numeric") mod=1
   if (class(modulator)=="list") mod=2
@@ -46,6 +46,6 @@
   
   if (is.null(X0)) X0=mi$y0
     out=ode(y=X0,times=times,fderiv,  parms=c(mod=mod), ...)
-  detach(model$globalParameters)
+# detach(model$globalParameters)
   out
 } 

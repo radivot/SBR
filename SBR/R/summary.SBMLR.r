@@ -20,10 +20,10 @@
 # these 4 lines replace the block commented after it  
   rLaws=sapply(model$reactions,function(x) x$strLaw)
   globals=model$globalParameters
-	attach(globals)  # e.g. for global coordination of k5 in SOD2012
+	# attach(globals)  # e.g. for global coordination of k5 in SOD2012
 	V0=sapply(model$reactions,function(x) x$law(S0[c(x$reactants,x$modifiers)],x$parameters))
 	names(V0)<-rIDs
-	detach(globals)  
+	# detach(globals)  
   
 # Incidence Matrix
 	incid=matrix(rep(0,nStates*nReactions),nrow=nStates)
